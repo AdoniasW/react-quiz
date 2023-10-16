@@ -1,3 +1,4 @@
+//change from useState to useReducer
 import { useReducer } from "react";
 const initalState = { count: 0, step: 1 };
 function reducer(state, action) {
