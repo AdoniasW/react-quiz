@@ -1,11 +1,13 @@
 import Header from "./Header";
+import Main from "./Main";
 function App() {
   return (
     <div>
       <Header />
-      <main className="main">
+      <Main className="main">
         <p>1/15</p>
-      </main>
+        <p>Question?</p>
+      </Main>
     </div>
   );
 }
