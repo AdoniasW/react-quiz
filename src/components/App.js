@@ -6,6 +6,7 @@ import Error from "./Error";
 import StartScreen from "./StartScreen";
 import Question from "./Question";
 import NextButton from "./NextButton";
+
 const intialState = {
   questions: [],
   //''loading', 'error', 'active','finished','ready']
@@ -49,6 +50,7 @@ function reducer(state, action) {
       return {
         ...state,
         index: state.index + 1,
+        answer: null,
       };
 
     default:
@@ -84,7 +86,7 @@ function App() {
               dispatch={dispatch}
               answer={answer}
             />
-            <NextButton dispatch={dispatch} />
+            <NextButton dispatch={dispatch} answer={answer} />
           </>
         )}
       </Main>
