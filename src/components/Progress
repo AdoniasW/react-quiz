@@ -1,0 +1,13 @@
+function Progress(index, numberQuestions) {
+  return (
+    <div>
+      <header className="progress">
+        <p>
+          Question <strong>{index}</strong> / {numberQuestions}
+        </p>
+      </header>
+    </div>
+  );
+}
+
+export default Progress;
