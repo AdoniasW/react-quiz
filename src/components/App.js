@@ -7,6 +7,7 @@ import StartScreen from "./StartScreen";
 import Question from "./Question";
 import NextButton from "./NextButton";
 import Progress from "./Progress";
+import FinishScreen from "./FinishScreen";
 //import ProgressBar from "./Progresddd";
 
 const intialState = {
@@ -16,6 +17,7 @@ const intialState = {
   index: 0,
   answer: null,
   points: 0,
+  highScore: 0,
 };
 
 function reducer(state, action) {
@@ -54,6 +56,13 @@ function reducer(state, action) {
         index: state.index + 1,
         answer: null,
       };
+    case "finish":
+      return {
+        ...state,
+        status: "finished",
+        highScore:
+          state.points > state.highScore ? state.points : state.highScore,
+      };
 
     default:
       throw new Error("Invalid action");
@@ -61,7 +70,7 @@ function reducer(state, action) {
 }
 function App() {
   const [state, dispatch] = useReducer(reducer, intialState);
-  const { questions, status, index, answer, points } = state;
+  const { questions, status, index, answer, points, highScore } = state;
   const maxPOssiblePoints = questions.reduce(
     (prev, cur) => prev + cur.points,
     0
@@ -99,8 +108,20 @@ function App() {
               dispatch={dispatch}
               answer={answer}
             />
-            <NextButton dispatch={dispatch} answer={answer} />
+            <NextButton
+              dispatch={dispatch}
+              answer={answer}
+              numQuestions={numQuestions}
+              index={index}
+            />
           </>
+        )}
+        {status === "finished" && (
+          <FinishScreen
+            points={points}
+            maxPOssiblePoints={maxPOssiblePoints}
+            highScore={highScore}
+          />
         )}
       </Main>
     </div>
